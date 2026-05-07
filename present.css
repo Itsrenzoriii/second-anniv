@@ -1,0 +1,302 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(-45deg, #87CEEB, #4169E1, #87CEEB);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  font-family: Arial, sans-serif;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.box {
+  border: 3px solid #333;
+  padding: 60px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  background-color: white;
+  text-align: center;
+  max-width: 600px;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  border: 2px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  flex: 1;
+  min-width: 100px;
+}
+
+.btn {
+  padding: 15px;
+  border: 3px solid #333;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  flex: 1;
+  min-width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.btn:hover {
+  background-color: #4CAF50;
+  transform: scale(1.05);
+}
+
+.btn.gift1:hover {
+  background-color: #FF69B4;
+}
+
+.btn.gift2:hover {
+  background-color: #FFD700;
+}
+
+.btn.gift3:hover {
+  background-color: #9370DB;
+}
+
+.btn.gift4:hover {
+  background-color: #FF4500;
+}
+
+.box h2, .instruction {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 24px;
+  font-family: 'Comic Sans MS', 'Brush Script MT', cursive;
+}
+
+.instruction {
+  font-style: italic;
+}
+
+.box img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Tablet / iPad optimization (portrait) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  body {
+    height: 100svh; /* helps on iPad Safari when address bar changes */
+    padding: 24px 12px;
+    overflow: auto; /* allow scrolling if content is taller */
+  }
+
+  .box {
+    max-width: 760px;
+    width: 100%;
+
+    /* keep the box fitting comfortably while still leaving room for all buttons */
+    padding: 40px 28px;
+    border-radius: 18px;
+  }
+
+
+  .box h2 {
+    font-size: clamp(24px, 3.2vw, 32px);
+    margin-bottom: 18px;
+    line-height: 1.15;
+  }
+
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    justify-items: center;
+    align-items: center;
+    margin-top: 18px;
+  }
+
+
+  /* Make 3 buttons feel like 2x2 (center last one) */
+  .buttons .btn:nth-child(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: min(360px, 100%);
+  }
+
+  .btn {
+    min-width: 0;
+    padding: 18px;
+    border-width: 3px;
+    border-radius: 14px;
+  }
+
+  .btn img {
+    width: clamp(92px, 10vw, 120px);
+    height: clamp(92px, 10vw, 120px);
+    border-radius: 12px;
+  }
+
+  .instruction {
+    font-size: 18px;
+    margin-top: 22px;
+    line-height: 1.35;
+  }
+
+  /* Reduce hover animation importance on touch devices */
+  .btn:hover {
+    transform: none;
+  }
+}
+
+/* iPad Landscape: same layout as laptop, but smaller subjects */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  body {
+    height: 100svh;
+    padding: 16px 10px;
+    overflow: auto;
+  }
+
+  .box {
+    max-width: 760px;
+    width: 100%;
+    padding: 34px 26px;
+    border-radius: 16px;
+  }
+
+  .box h2 {
+    font-size: clamp(20px, 2.2vw, 28px);
+    margin-bottom: 14px;
+    line-height: 1.15;
+  }
+
+  /* Avoid stretch: keep a consistent centered row like laptop */
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+    width: 100%;
+  }
+
+  /* Fixed button sizing prevents the buttons from stretching wider */
+  .btn {
+    flex: 0 0 auto;
+    min-width: 0;
+    width: clamp(92px, 12vw, 120px);
+    padding: 10px;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+
+  /* Prevent the last (3rd) button from getting stretched by inherited sizing */
+  .buttons > .btn:nth-child(3) {
+    width: clamp(92px, 12vw, 120px);
+  }
+
+
+  .btn img {
+
+    width: clamp(58px, 6vw, 86px);
+    height: clamp(58px, 6vw, 86px);
+    border-radius: 10px;
+  }
+
+  .instruction {
+    font-size: 16px;
+    margin-top: 14px;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+}
+
+
+/* Small touch devices (extra safety) */
+@media (max-width: 767px) {
+  body {
+    height: 100svh;
+    padding: 18px 12px;
+    overflow: auto;
+  }
+
+  .box {
+    width: 100%;
+    padding: 26px 18px;
+    border-radius: 16px;
+    max-width: 520px;
+  }
+
+  .box h2 {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    padding: 0 4px;
+    margin-top: 16px;
+  }
+
+  .buttons .btn:nth-child(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: min(320px, 100%);
+  }
+
+  .btn {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .btn img {
+    width: 92px;
+    height: 92px;
+  }
+
+  .instruction {
+    font-size: 16px;
+    margin-top: 18px;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+}
+

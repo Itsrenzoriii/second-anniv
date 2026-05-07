@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facts</title>
+    <link rel="stylesheet" href="facts.css">
+</head>
+<body>
+    <div class="container">
+        <button class="back-btn" onclick="window.location.href='present.html'">Back</button>
+        <h2>Jamellah Facts</h2>
+
+        <div class="card-stack">
+            <div class="card" data-index="0">
+                <div class="card-content">
+                    <img src="image/crying.gif" alt="Bubu">
+                    <p>Ikaw yung tipo ng babae na sobrang lakas at sobrang sipag para sa mga kapatid at sarili even to me, but ikaw rin itong sobrang vulnerable when faced by loneliness, i love you so much, i am always here </p>
+                </div>
+            </div>
+            <div class="card" data-index="1">
+                <div class="card-content">
+                    <img src="image/leo.jpg" alt="Dudu">
+                    <p>Isa kang ganap na Leo, haha nagkamali pa nga ako sa pag guess, im sorry darling hehehe</p>
+                </div>
+            </div>
+            <div class="card" data-index="2">
+                <div class="card-content">
+                    <img src="image/bluemoon.jpg" alt="Dudu">
+                    <p>Fave mo yung blue color hmpf, same rin naman ganyan rin saken</p>
+                </div>
+            </div>
+            <div class="card" data-index="4">
+                <div class="card-content">
+                    <img src="image/angry.jpg" alt="Dudu">
+                    <p>You are the kind of person who turns my worst day into something calming and soft to feel</p>
+                </div>
+            </div>
+            <div class="card" data-index="5">
+                <div class="card-content">
+                    <img src="image/dudu.jpg" alt="Dudu">
+                    <p>You are the kind of person who ragebaits me a lot minsan nakaka pikon pero ang kyut parin hahaha</p>
+                </div>
+            </div>
+            <div class="card" data-index="6">
+                <div class="card-content">
+                    <img src="image/goldenhour.gif" alt="Bubu">
+                    <p>I love it when you love the sunrise and sunsets, ka vibe jud ta</p>
+                </div>
+            </div>
+            <div class="card" data-index="7">
+                <div class="card-content">
+                    <img src="image/tulips.jpg" alt="Dudu">
+                    <p>Tulips are your fave, your favorites grew on me</p>
+                </div>
+            </div>
+            <div class="card" data-index="8">
+                <div class="card-content">
+                    <img src="image/yapper.gif" alt="Dudu">
+                    <p>Isa kang serial yapper pero thats what i love about you, you never stop on talking to me, i love it. Your random conversations with me are cute</p>
+                </div>
+            </div>
+            <div class="card" data-index="9">
+                <div class="card-content">
+                    <img src="image/pastmistakes.gif" alt="Bubu">
+                    <p>Isa ito sa natatawa ako pero not mockingly but cutely haha, kasi kapag napuno kita ng pagsubok :> binabanggit mo lahat ng pasts ko hahahaha which is hillarious hahaha but so cute sayo</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="instruction">Swipe the card</p>
+    </div>
+
+    <script src="facts.js"></script>
+
+    <!-- Background music -->
+    <audio id="facts-bg-audio" autoplay loop>
+        <source src="factsmusic/Justin Bieber ft ROSÉ (. Hamzan) - (Office Video).mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        (function () {
+            const audio = document.getElementById('facts-bg-audio');
+            if (!audio) return;
+
+            // Some browsers block autoplay with sound until user interaction.
+            // Try immediately, then resume on first interaction.
+            const tryPlay = () => audio.play().catch(() => {});
+            tryPlay();
+
+            ['click', 'touchstart', 'keydown'].forEach((evt) => {
+                window.addEventListener(evt, () => {
+                    tryPlay();
+                }, { once: true, passive: true });
+            });
+        })();
+    </script>
+</body>
+</html>
+

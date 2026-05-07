@@ -1,0 +1,315 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #FFD700, #FFA500, #FFD700);
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+  font-family: 'Comic Sans MS', cursive;
+  padding: 20px 0;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.back-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px 20px 10px;
+}
+
+.back-btn {
+  background: #f9f9f9;
+  color: #333;
+  border: 3px solid #333;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-family: 'Comic Sans MS', 'Brush Script MT', cursive; 
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  min-width: 120px;
+  font-family: 'Comic Sans MS', cursive;
+}
+
+.back-btn:hover {
+  background: #FFD700;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 100px);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.gallery-title {
+  color: #333;
+  font-size: 32px;
+  margin-bottom: 30px;
+  font-family: 'Comic Sans MS', cursive;
+  text-align: center;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px;
+  width: 100%;
+  perspective: 1000px;
+  position: relative;
+  padding: 30px 0;
+}
+
+/* String connecting cards */
+.gallery-grid::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    #333 5%,
+    #333 95%,
+    transparent 100%
+  );
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  opacity: 0.6;
+}
+
+/* 3D Swinging Card Styles */
+.gallery-card {
+  width: 100%;
+  height: 250px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform-origin: top center;
+  animation: swing var(--duration, 6s) ease-in-out infinite;
+  cursor: pointer;
+}
+
+/* Stationary pin/string - doesn't swing with card */
+.gallery-card-inner::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: var(--pin-position, 50%);
+  transform: translateX(-50%) rotate(var(--pin-angle, 0deg));
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, #333 0%, #555 50%, transparent 100%);
+  border-radius: 1px;
+  z-index: 10;
+}
+
+.gallery-card-inner::after {
+  content: '';
+  position: absolute;
+  top: -45px;
+  left: var(--pin-position, 50%);
+  transform: translateX(-50%) rotate(var(--pin-angle, 0deg));
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, #FFD700 30%, #FFA500 70%, #333 100%);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  z-index: 11;
+}
+
+@keyframes swing {
+  0%, 100% {
+    transform: rotateX(3deg) rotateZ(-2deg);
+  }
+  50% {
+    transform: rotateX(-3deg) rotateZ(2deg);
+    filter: brightness(1.1);
+  }
+}
+
+.gallery-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.gallery-card:hover .gallery-card-inner {
+  transform: translateZ(50px);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  backface-visibility: hidden;
+}
+
+/* Card face styling */
+.gallery-card-front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 3px solid #fff;
+  animation: shadowSwing 6s ease-in-out infinite;
+}
+
+@keyframes shadowSwing {
+  0%, 100% {
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+  }
+  50% {
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  }
+}
+
+.gallery-card:hover {
+  transform: rotateX(0deg) rotateY(0deg) scale(1.05);
+}
+
+.gallery-card:hover .gallery-image {
+  box-shadow: 0 15px 30px rgba(255, 215, 0, 0.5);
+  border-color: #FFD700;
+}
+
+/* Lightbox styles */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox-image {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.lightbox-close:hover {
+  color: #FFD700;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 50px;
+  cursor: pointer;
+  padding: 20px;
+  transition: color 0.3s ease;
+}
+
+.lightbox-prev {
+  left: 20px;
+}
+
+.lightbox-next {
+  right: 20px;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  color: #FFD700;
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+  }
+  
+  .gallery-card {
+    height: 180px;
+  }
+  
+  .gallery-title {
+    font-size: 24px;
+  }
+  
+  .lightbox-prev,
+  .lightbox-next {
+    font-size: 30px;
+    padding: 10px;
+  }
+}
+
+/* Tablet View Optimization (768px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+  
+  .gallery-card {
+    height: 220px;
+  }
+  
+  .gallery-title {
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+  
+  .back-btn {
+    font-size: 20px;
+    padding: 14px 28px;
+  }
+  
+  .lightbox-image {
+    max-width: 85%;
+    max-height: 75%;
+  }
+
+  .lightbox-close {
+    font-size: 48px;
+  }
+  
+  .lightbox-prev,
+  .lightbox-next {
+    font-size: 45px;
+    padding: 15px;
+  }
+}
