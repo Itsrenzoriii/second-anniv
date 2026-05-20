@@ -8,7 +8,7 @@ body {
   background: linear-gradient(-45deg, #9370DB, #663399, #301934, #9370DB);
   background-size: 400% 400%;
   animation: gradientShift 25s ease infinite;
-
+  background: linear-gradient(-45deg, #87CEEB, #4169E1, #87CEEB);
   font-family: Arial, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
