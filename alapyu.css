@@ -17,7 +17,7 @@ body {
   position: relative;
 }
 
-/* Tulips background */
+/* Tulips background 
 body::before {
   content: "";
   position: fixed;
@@ -29,7 +29,7 @@ body::before {
   z-index: -1;
   pointer-events: none;
 }
-
+ */
 
 .container {
   animation: slideIn 1s ease-out;
